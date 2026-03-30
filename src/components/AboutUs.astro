@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import aboutUsIllustration from '../assets/about-us-hikers.svg';
+
+interface AboutHighlight {
+  key: 'compass' | 'leaf' | 'group' | 'world';
+  text: string;
+}
+
+const highlights: AboutHighlight[] = [
+  { key: 'compass', text: 'Guias Expertos' },
+  { key: 'leaf', text: 'Eco-Consconsciente' },
+  { key: 'group', text: 'Grupos Pequenos' },
+  { key: 'world', text: 'Impacto Local' }
+];
+---
+
+<section class="bg-slate-950 py-24">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="relative">
+        <Image
+          src={aboutUsIllustration}
+          alt="Cuatro senderistas con mochilas observan una montana triangular bajo un cielo claro"
+          class="w-full h-auto rounded-3xl shadow-2xl shadow-black/35"
+          quality="high"
+          loading="lazy"
+          width={1200}
+          height={900}
+          format="webp"
+        />
+
+        <div class="absolute bottom-4 right-4 bg-slate-900/90 rounded-xl px-4 py-3 border border-slate-700/70">
+          <p class="text-blue-400 text-2xl font-bold leading-none">12+</p>
+          <p class="text-slate-300 text-xs mt-1">Anos de experiencia</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-emerald-400 text-sm font-mono tracking-wider uppercase mb-4">NUESTRA HISTORIA</p>
+
+        <h2 class="text-white text-4xl lg:text-5xl font-serif font-semibold leading-tight mb-8">Quienes somos?</h2>
+
+        <p class="text-slate-300 leading-relaxed mb-5">
+          En Nomad Expeditions nos apasiona conectar a los viajeros con la naturaleza mas pura y las culturas locales autenticas. No somos solo una agencia de viajes: somos exploradores dedicados a crear puentes entre lo cotidiano y lo extraordinario.
+        </p>
+
+        <p class="text-slate-300 leading-relaxed">
+          Nuestro equipo de guias certificados garantiza seguridad y una inmersion profunda en cada destino, respetando siempre el medio ambiente y apoyando a las comunidades locales que nos reciben.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 mt-10">
+          {highlights.map((item) => (
+            <div class="flex items-center gap-3 rounded-lg bg-slate-900/50 border border-slate-800/80 px-4 py-3">
+              <span class="text-sky-300" aria-hidden="true">
+                {item.key === 'compass' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.5 13.5l3-3m0 0l-2.2 6.2-6.3 2.2 2.2-6.3 6.3-2.1z" />
+                    <circle cx="12" cy="12" r="9" stroke-width="1.8" />
+                  </svg>
+                )}
+
+                {item.key === 'leaf' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 14c0-5.5 4.6-10 10-10 1.7 0 3 .2 4 .6-.3 1-.6 2.3-.6 4 0 5.4-4.5 10-10 10-1.2 0-2.3-.2-3.4-.6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 16c2-2 4.7-4 8-5.5" />
+                  </svg>
+                )}
+
+                {item.key === 'group' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1" />
+                    <circle cx="9" cy="7" r="3" stroke-width="1.8" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M23 20v-1a4 4 0 0 0-3-3.87" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 4.13a3 3 0 0 1 0 5.75" />
+                  </svg>
+                )}
+
+                {item.key === 'world' && (
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" stroke-width="1.8" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12h18" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3c2.5 2.3 4 5.6 4 9s-1.5 6.7-4 9c-2.5-2.3-4-5.6-4-9s1.5-6.7 4-9z" />
+                  </svg>
+                )}
+              </span>
+
+              <span class="text-white text-sm font-medium">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

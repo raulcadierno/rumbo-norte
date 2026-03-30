@@ -1,0 +1,52 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[#0a1120] border-t border-slate-800/50">
+  <div class="container mx-auto px-4 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex items-center gap-3">
+      <svg
+        class="w-8 h-8 text-blue-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76" />
+      </svg>
+      <span class="text-white font-bold text-xl">Nomad Expeditions</span>
+    </div>
+
+    <nav aria-label="Redes sociales" class="flex items-center gap-6">
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-slate-400 hover:text-white transition-colors duration-200"
+      >
+        Instagram
+      </a>
+      <a
+        href="https://facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-slate-400 hover:text-white transition-colors duration-200"
+      >
+        Facebook
+      </a>
+      <a
+        href="https://twitter.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-slate-400 hover:text-white transition-colors duration-200"
+      >
+        Twitter
+      </a>
+    </nav>
+
+    <p class="text-slate-500 text-sm text-center md:text-right">
+      © {currentYear} Nomad Expeditions. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>

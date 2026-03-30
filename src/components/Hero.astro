@@ -1,0 +1,161 @@
+---
+// Hero.astro - Sección Hero optimizada según reglas del proyecto
+import { Image } from 'astro:assets';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  backgroundImage?: string;
+}
+
+const { 
+  title = "Vive la aventura de tu vida",
+  subtitle = "Explora destinos exóticos con guías expertos y sumérgete en la naturaleza más pura.",
+  ctaText = "Ver Expediciones",
+  ctaHref = "#destinos",
+  backgroundImage = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop"
+} = Astro.props;
+---
+
+<!-- Hero Section - Pantalla completa con imagen de fondo optimizada -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  
+  <!-- Imagen de fondo optimizada con astro:assets -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={backgroundImage}
+      alt="Paisaje montañoso verde, destino de aventura y naturaleza"
+      class="w-full h-full object-cover"
+      quality="high"
+      loading="eager"
+      width={1920}
+      height={1080}
+      format="webp"
+    />
+  </div>
+  
+  <!-- Overlay semitransparente para contraste WCAG -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+  
+  <!-- Contenido principal centrado -->
+  <div class="relative z-20 text-center px-4 max-w-4xl mx-auto">
+    
+    <!-- Título principal H1 - SEO optimizado -->
+    <h1 class="hero-title hero-fade-in text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+      {title}
+    </h1>
+    
+    <!-- Subtítulo -->
+    <p class="hero-subtitle hero-fade-in hero-fade-in-delay text-xl md:text-2xl text-white/90 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
+      {subtitle}
+    </p>
+    
+    <!-- Botón CTA con icono flecha -->
+    <div class="flex justify-center">
+      <a 
+        href={ctaHref}
+        class="hero-cta group bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 md:px-10 md:py-5 rounded-xl font-semibold text-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 flex items-center space-x-3"
+        data-astro-prefetch
+      >
+        <span>{ctaText}</span>
+        
+        <!-- Icono flecha hacia abajo -->
+        <svg 
+          class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </a>
+    </div>
+    
+  </div>
+  
+  <!-- Scroll indicator (opcional) -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+    <div class="animate-bounce">
+      <svg 
+        class="w-6 h-6 text-white/70" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          stroke-width="2" 
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        />
+      </svg>
+    </div>
+  </div>
+  
+</section>
+
+<style>
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-fade-in {
+    animation: fade-up 0.8s ease-out both;
+  }
+
+  .hero-fade-in-delay {
+    animation-delay: 0.2s;
+  }
+
+  /* Optimizaciones adicionales para rendimiento */
+  section {
+    /* Soporte para backdrop-filter en navegadores older */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Animación suave para el hover del botón */
+  a:hover {
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Mejora de contraste para accesibilidad */
+  h1, p {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Responsive typography fine-tuning */
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.1;
+    }
+    
+    p {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade-in,
+    .hero-fade-in-delay {
+      animation: none;
+    }
+  }
+</style>

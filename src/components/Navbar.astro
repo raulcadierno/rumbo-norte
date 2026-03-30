@@ -1,0 +1,221 @@
+---
+// NavigationMenu.astro - Componente optimizado según reglas del proyecto
+export interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+---
+
+<!-- Navbar principal con glassmorphism -->
+<header 
+  id="navigation" 
+  class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? 'bg-transparent' : 'backdrop-blur-md bg-slate-900/30 border-b border-white/10'}`}
+  data-navbar
+>
+  <!-- Checkbox para menú móvil CSS-only -->
+  <input type="checkbox" class="hidden" id="mobile-toggle">
+  
+  <nav class="container mx-auto px-4 py-6 flex items-center justify-between" data-nav-content>
+    
+    <!-- Logo Section -->
+    <div class="flex items-center space-x-3">
+      <!-- Compass Icon SVG -->
+      <svg 
+        class="w-8 h-8 text-blue-400" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76" />
+      </svg>
+      
+      <!-- Logo Text con ViewTransition -->
+      <a 
+        href="/" 
+        class="text-2xl font-bold text-white hover:text-blue-400 transition-colors duration-200"
+        data-astro-prefetch
+      >
+        Nomad Expeditions
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="hidden md:flex items-center space-x-8">
+      <a 
+        href="#destinos" 
+        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Destinos
+      </a>
+      <a 
+        href="#nosotros" 
+        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Nosotros
+      </a>
+      <a 
+        href="#aventuras" 
+        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Aventuras
+      </a>
+      
+      <!-- Reservar Button (Pill Style) -->
+      <a 
+        href="#contacto" 
+        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+        data-astro-prefetch
+      >
+        Reservar
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button - CSS-only -->
+    <label for="mobile-toggle" class="md:hidden text-white hover:text-blue-400 transition-colors duration-200 cursor-pointer">
+      <!-- Hamburger Icon -->
+      <svg class="w-6 h-6 mobile-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <!-- X Icon -->
+      <svg class="w-6 h-6 mobile-icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </label>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden mobile-menu bg-slate-900/95 backdrop-blur-md border-t border-white/10">
+    <div class="container mx-auto px-4 py-6 space-y-4">
+      <a 
+        href="#destinos" 
+        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Destinos
+      </a>
+      <a 
+        href="#nosotros" 
+        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Nosotros
+      </a>
+      <a 
+        href="#aventuras" 
+        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
+        data-astro-prefetch
+      >
+        Aventuras
+      </a>
+      <a 
+        href="#contacto" 
+        class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-200 mt-4"
+        data-astro-prefetch
+      >
+        Reservar
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Script mínimo para scroll effect - Solo funcionalidad crítica -->
+<script>
+  // Optimizado: Solo el efecto de scroll, menú móvil en CSS puro
+  function initScrollEffect() {
+    const nav = document.querySelector('[data-navbar]') as HTMLElement;
+    const navContent = document.querySelector('[data-nav-content]') as HTMLElement;
+    
+    if (!nav || !navContent) return;
+    
+    let ticking = false;
+    
+    function updateNavbar() {
+      const scrolled = window.scrollY > 50;
+      
+      // Clases para el efecto scroll
+      nav.classList.toggle('backdrop-blur-md', scrolled);
+      nav.classList.toggle('bg-slate-900/30', scrolled);
+      nav.classList.toggle('border-b', scrolled);
+      nav.classList.toggle('border-white/10', scrolled);
+      
+      // Padding dinámico
+      navContent.classList.toggle('py-3', scrolled);
+      navContent.classList.toggle('py-6', !scrolled);
+      
+      ticking = false;
+    }
+    
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    }
+    
+    // Event listener optimizado
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Estado inicial
+    updateNavbar();
+  }
+  
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollEffect);
+  } else {
+    initScrollEffect();
+  }
+</script>
+
+<style>
+  /* Glassmorphism optimizado */
+  [data-navbar] {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  /* Transiciones optimizadas */
+  [data-navbar],
+  [data-nav-content] {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Mobile menu CSS-only */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  #mobile-toggle:checked ~ nav label .mobile-icon-open {
+    display: none;
+  }
+  
+  #mobile-toggle:checked ~ nav label .mobile-icon-close {
+    display: block;
+  }
+  
+  #mobile-toggle:checked ~ .mobile-menu {
+    max-height: 100vh;
+  }
+  
+  /* Efectos hover optimizados */
+  a {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  a:hover {
+    text-shadow: 0 0 8px currentColor;
+  }
+  
+  /* Z-index alto */
+  [data-navbar] {
+    z-index: 9999;
+  }
+</style>
