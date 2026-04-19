@@ -1,0 +1,109 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TravelHero from '../../components/travel/TravelHero.astro';
+import QuickInfoBar from '../../components/travel/QuickInfoBar.astro';
+import ItinerarySection from '../../components/travel/ItinerarySection.astro';
+import { getTravelData } from '../../utils/itineraryHelper';
+
+import brasilImg from '../../assets/viajes/brasil/brasil.jpg';
+import islandiaImg from '../../assets/viajes/islandia/islandia.jpg';
+
+export async function getStaticPaths() {
+  const viajes = await getCollection('viajes');
+
+  const paths = viajes.flatMap((viaje) => {
+    const canonicalSlug = viaje.data.routeId?.trim() || viaje.id;
+
+    if (canonicalSlug === viaje.id) {
+      return [{
+        params: { slug: viaje.id },
+        props: { viaje }
+      }];
+    }
+
+    return [
+      {
+        params: { slug: canonicalSlug },
+        props: { viaje }
+      },
+      {
+        params: { slug: viaje.id },
+        props: { viaje }
+      }
+    ];
+  });
+
+  return paths;
+}
+
+interface Props {
+  viaje: CollectionEntry<'viajes'>;
+}
+
+const { viaje } = Astro.props as Props;
+const { title, subtitle, description, duration, groupSize, price, accentColor = '#3b82f6' } = viaje.data;
+const { expeditionSummary, itineraryDays } = getTravelData(viaje);
+
+const destinationColors = {
+  islandia: {
+    background: '#101729',
+    quickInfoBg: '#22335b'
+  },
+  brasil: {
+    background: '#0f172a',
+    quickInfoBg: '#1e293b'
+  }
+} as const;
+
+const colors = destinationColors[viaje.id as keyof typeof destinationColors] || destinationColors.brasil;
+
+const imageMap = {
+  brasil: brasilImg,
+  islandia: islandiaImg
+} as const;
+
+const currentImage = imageMap[viaje.id as keyof typeof imageMap] || islandiaImg;
+---
+
+<Layout title={`${title} | Nomad Expeditions`} description={description}>
+  <main
+    style={`--accent-color: ${accentColor}; --background-color: ${colors.background}; --quickinfo-bg: ${colors.quickInfoBg}`}
+  >
+    <TravelHero
+      title={title}
+      subtitle={subtitle}
+      description={description}
+      image={currentImage}
+    />
+
+    <section class="relative py-20" style="background-color: var(--background-color)">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-16">
+            <QuickInfoBar
+              duration={duration}
+              groupSize={groupSize}
+              price={price}
+            />
+          </div>
+
+          <h2 class="text-white text-3xl md:text-4xl lg:text-5xl text-center mb-12 leading-tight">
+            Resumen de la Expedición
+          </h2>
+
+          <div class="prose prose-lg prose-slate prose-invert mx-auto text-center">
+            <div class="text-slate-300 text-lg leading-relaxed">
+              <p>{expeditionSummary}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ItinerarySection
+      itineraryDays={itineraryDays}
+      placeholderImage={islandiaImg}
+    />
+  </main>
+</Layout>

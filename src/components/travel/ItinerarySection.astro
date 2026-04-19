@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { ItineraryDay } from '../../utils/itineraryHelper';
+
+export interface Props {
+  itineraryDays: ItineraryDay[];
+  placeholderImage: ImageMetadata;
+}
+
+const { itineraryDays, placeholderImage } = Astro.props as Props;
+---
+
+{itineraryDays.length > 0 && (
+  <section class="relative py-20" style="background-color: var(--background-color)">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-center text-white text-4xl md:text-5xl font-serif mb-16">
+          El Viaje al Detalle
+        </h2>
+
+        <div class="relative">
+          <div class="absolute left-5 md:left-1/2 top-0 bottom-0 border-l border-dashed -translate-x-1/2" style="border-color: rgba(148, 163, 184, 0.35);"></div>
+
+          <div class="space-y-14 md:space-y-16">
+            {itineraryDays.map((day, index) => {
+              const textOnLeft = index % 2 === 0;
+              const dayImage = day.imagePath ? placeholderImage : placeholderImage;
+
+              return (
+                <article class="relative grid md:grid-cols-[minmax(0,1fr)_88px_minmax(0,1fr)] gap-6 md:gap-8 items-center pl-12 md:pl-0">
+                  <div class="absolute left-5 md:static md:col-start-2 md:row-start-1 md:flex md:justify-center -translate-x-1/2 md:translate-x-0">
+                    <div class="w-12 h-12 rounded-full bg-sky-500 border-4 border-slate-950 text-white text-xs font-semibold tracking-wide flex items-center justify-center shadow-lg shadow-sky-500/20">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                  </div>
+
+                  <div class:list={[
+                    'rounded-2xl p-6 md:p-8 backdrop-blur-sm',
+                    'bg-[#22335b]',
+                    textOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-3 md:row-start-1'
+                  ]}>
+                    <p class="text-sky-400 text-xs sm:text-sm font-semibold tracking-[0.15em] uppercase mb-3">
+                      {day.dayLabel}
+                    </p>
+                    <h3 class="text-white text-2xl md:text-3xl font-bold leading-tight mb-4">
+                      {day.title}
+                    </h3>
+                    <p class="text-slate-300 text-base md:text-lg leading-relaxed">
+                      {day.description}
+                    </p>
+                  </div>
+
+                  <div class:list={[
+                    'rounded-2xl overflow-hidden border border-slate-300/15 shadow-xl shadow-black/20',
+                    textOnLeft ? 'md:col-start-3 md:row-start-1' : 'md:col-start-1 md:row-start-1'
+                  ]}>
+                    <Image
+                      src={dayImage}
+                      alt={`${day.dayLabel} - ${day.title}`}
+                      class="w-full h-64 md:h-72 object-cover"
+                      width={960}
+                      height={640}
+                      loading="lazy"
+                      format="webp"
+                      quality="high"
+                    />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
