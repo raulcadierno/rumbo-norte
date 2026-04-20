@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import islandiaImg from '../../assets/viajes/islandia/islandia-map.png';
+import type { ItineraryDay } from '../../utils/itineraryHelper';
+
+export interface Props {
+  itineraryDays: ItineraryDay[];
+}
+
+const { itineraryDays } = Astro.props as Props;
+---
+
+<section class="w-full" style="background-color: #101729">
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 items-center min-h-fit">
+    
+    <div class="w-full flex justify-start items-center overflow-hidden">
+        <Image
+          src={islandiaImg}
+          alt="Mapa visual del viaje"
+          class="w-full h-auto max-w-full" 
+          loading="lazy"
+          format="webp"
+          quality="high"
+        />
+    </div>
+
+    <div class="w-full py-12 md:py-16 pl-8 md:pl-12 lg:pl-16 pr-4 md:pr-8 lg:pr-12">
+      <div class="w-full max-w-2xl">
+        <ol class="space-y-4">
+          {itineraryDays.map((day, index) => (
+            <li class="flex items-center gap-4 group">
+              <span
+                class="w-7 h-7 rounded-full shrink-0 text-[10px] font-bold text-white flex items-center justify-center transition-transform group-hover:scale-110"
+                style="background-color: var(--accent-color)"
+              >
+                {index + 1}
+              </span>
+              <p class="text-slate-200 text-base md:text-lg font-medium">
+                {day.title}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="w-full">
+    <div class="max-w-7xl mx-auto px-4 py-12 md:py-16 text-center">
+      <h2 class="text-white text-3xl md:text-4xl font-bold mb-4">
+        ¿Quieres descubrir cada secreto de esta ruta?
+      </h2>
+      <span class="text-slate-400 text-lg md:text-xl mb-10 block">
+        Explora el día a día completo de nuestra expedición.
+      </span>
+
+      <a
+        href="#itinerario-detallado"
+        class="inline-flex items-center px-10 py-4 rounded-full text-white font-bold transition-all hover:scale-105 active:scale-95"
+        style="background-color: var(--accent-color)"
+      >
+        Ver itinerario completo
+        <svg
+          class="w-5 h-5 ml-3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

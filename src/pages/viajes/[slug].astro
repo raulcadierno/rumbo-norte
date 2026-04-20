@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import TravelHero from '../../components/travel/TravelHero.astro';
 import QuickInfoBar from '../../components/travel/QuickInfoBar.astro';
+import TravelMapSummary from '../../components/travel/TravelMapSummary.astro';
 import ItinerarySection from '../../components/travel/ItinerarySection.astro';
 import { getTravelData } from '../../utils/itineraryHelper';
 
@@ -100,6 +101,8 @@ const currentImage = imageMap[viaje.id as keyof typeof imageMap] || islandiaImg;
         </div>
       </div>
     </section>
+
+    <TravelMapSummary itineraryDays={itineraryDays} />
 
     <ItinerarySection
       itineraryDays={itineraryDays}
