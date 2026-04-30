@@ -7,7 +7,12 @@ image: "/src/assets/viajes/brasil/brasil.jpg"
 duration: "7 dias / 6 noches"
 groupSize: "Maximo 12 personas"
 price: "USD 2,180"
-accentColor: "#10b981"
+primaryColor: "#1B4332"
+secondaryColor: "#F4E1D2"
+ctaButtonColor: "#FFB703"
+linkHoverColor: "#259DBB"
+textColor: "#0A141F"
+backgroundColor: "#7D7D7D"
 ---
 
 Una combinacion de selva, costa y cultura local para viajeros que quieren aventura y descanso en el mismo viaje.

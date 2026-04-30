@@ -7,7 +7,6 @@ image: "/src/assets/viajes/islandia/islandia.jpg"
 duration: "9 dias / 8 noches"
 groupSize: "Maximo 10 personas"
 price: "USD 3,250"
-accentColor: "#3b82f6"
 ---
 
 Islandia no es solo un destino, es una experiencia sensorial completa. En esta expedición de 10 días, recorreremos la famosa Ring Road, adentrándonos en tierras altas menos exploradas. Desde las columnas de basalto negro en Reynisfjara hasta los glaciares milenarios de Vatnajökull, cada kilómetro es una postal. Buscaremos la aurora boreal en las noches de invierno o disfrutaremos del sol de medianoche en verano, siempre bajo la guía de expertos conocedores del terreno.

@@ -5,12 +5,13 @@ import type { ItineraryDay } from '../../utils/itineraryHelper';
 
 export interface Props {
   itineraryDays: ItineraryDay[];
+  accentColor?: string;
 }
 
-const { itineraryDays } = Astro.props as Props;
+const { itineraryDays, accentColor = '#2563EB' } = Astro.props as Props;
 ---
 
-<section class="w-full" style="background-color: #101729">
+<section class="w-full bg-brand-bg">
   <div class="w-full grid grid-cols-1 md:grid-cols-2 items-center min-h-fit">
     
     <div class="w-full flex justify-start items-center overflow-hidden">
@@ -30,12 +31,12 @@ const { itineraryDays } = Astro.props as Props;
           {itineraryDays.map((day, index) => (
             <li class="flex items-center gap-4 group">
               <span
-                class="w-7 h-7 rounded-full shrink-0 text-[10px] font-bold text-white flex items-center justify-center transition-transform group-hover:scale-110"
-                style="background-color: var(--accent-color)"
+                class="w-7 h-7 rounded-full shrink-0 text-sm font-bold flex items-center justify-center transition-transform group-hover:scale-110"
+                style={`background-color: ${accentColor}`}
               >
                 {index + 1}
               </span>
-              <p class="text-slate-200 text-base md:text-lg font-medium">
+              <p class="text-base md:text-lg font-medium text-brand-text">
                 {day.title}
               </p>
             </li>
@@ -48,33 +49,19 @@ const { itineraryDays } = Astro.props as Props;
 
   <div class="w-full">
     <div class="max-w-7xl mx-auto px-4 py-12 md:py-16 text-center">
-      <h2 class="text-white text-3xl md:text-4xl font-bold mb-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-brand-text">
         ¿Quieres descubrir cada secreto de esta ruta?
       </h2>
-      <span class="text-slate-400 text-lg md:text-xl mb-10 block">
+      <span class="text-lg md:text-xl mb-10 block text-brand-text-muted">
         Explora el día a día completo de nuestra expedición.
       </span>
 
       <a
         href="#itinerario-detallado"
-        class="inline-flex items-center px-10 py-4 rounded-full text-white font-bold transition-all hover:scale-105 active:scale-95"
-        style="background-color: var(--accent-color)"
+        class="inline-flex items-center px-10 py-4 rounded-full text-white font-bold uppercase tracking-wide transition-all hover:scale-105 active:scale-95"
+        style={`background-color: ${accentColor}`}
       >
-        Ver itinerario completo
-        <svg
-          class="w-5 h-5 ml-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
+        ITINERARIO DETALLADO
       </a>
     </div>
   </div>

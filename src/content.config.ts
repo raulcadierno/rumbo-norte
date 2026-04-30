@@ -30,7 +30,12 @@ const viajes = defineCollection({
 		duration: z.string(),
 		groupSize: z.string(),
 		price: z.string(),
-		accentColor: z.string().optional()
+		primaryColor: z.string().optional(),
+		secondaryColor: z.string().optional(),
+		ctaButtonColor: z.string().optional(),
+		linkHoverColor: z.string().optional(),
+		textColor: z.string().optional(),
+		backgroundColor: z.string().optional()
 	})
 });
 

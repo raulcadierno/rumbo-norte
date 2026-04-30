@@ -10,7 +10,7 @@ const { transparent = false } = Astro.props;
 <!-- Navbar principal con glassmorphism -->
 <header 
   id="navigation" 
-  class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? 'bg-transparent' : 'backdrop-blur-md bg-slate-900/30 border-b border-white/10'}`}
+  class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? 'bg-transparent' : 'backdrop-blur-md bg-nomad-primary/70 border-b border-white/10'}`}
   data-navbar
 >
   <!-- Checkbox para menú móvil CSS-only -->
@@ -35,7 +35,7 @@ const { transparent = false } = Astro.props;
       <!-- Logo Text con ViewTransition -->
       <a 
         href="/" 
-        class="text-2xl font-bold text-white hover:text-blue-400 transition-colors duration-200"
+        class="text-2xl font-bold text-nomad-text-main hover:text-nomad-hover transition-colors duration-200"
         data-astro-prefetch
       >
         Nomad Expeditions
@@ -45,31 +45,24 @@ const { transparent = false } = Astro.props;
     <!-- Desktop Navigation Links -->
     <div class="hidden md:flex items-center space-x-8">
       <a 
-        href="#destinos" 
-        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
+        href="/#destinos" 
+        class="text-nomad-text-main/90 hover:text-nomad-text-main hover:scale-105 transition-all duration-200 font-medium"
         data-astro-prefetch
       >
         Destinos
       </a>
       <a 
-        href="#nosotros" 
-        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
+        href="/#nosotros" 
+        class="text-nomad-text-main/90 hover:text-nomad-text-main hover:scale-105 transition-all duration-200 font-medium"
         data-astro-prefetch
       >
         Nosotros
       </a>
-      <a 
-        href="#aventuras" 
-        class="text-white/90 hover:text-white hover:scale-105 transition-all duration-200 font-medium"
-        data-astro-prefetch
-      >
-        Aventuras
-      </a>
       
       <!-- Reservar Button (Pill Style) -->
       <a 
-        href="#contacto" 
-        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+        href="/#contacto" 
+        class="bg-nomad-cta hover:bg-nomad-hover text-nomad-text-main px-6 py-2.5 rounded-full font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-nomad-cta/25"
         data-astro-prefetch
       >
         Reservar
@@ -77,7 +70,7 @@ const { transparent = false } = Astro.props;
     </div>
 
     <!-- Mobile Menu Button - CSS-only -->
-    <label for="mobile-toggle" class="md:hidden text-white hover:text-blue-400 transition-colors duration-200 cursor-pointer">
+    <label for="mobile-toggle" class="md:hidden text-nomad-text-main hover:text-nomad-hover transition-colors duration-200 cursor-pointer">
       <!-- Hamburger Icon -->
       <svg class="w-6 h-6 mobile-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -90,32 +83,25 @@ const { transparent = false } = Astro.props;
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="md:hidden mobile-menu bg-slate-900/95 backdrop-blur-md border-t border-white/10">
+  <div class="md:hidden mobile-menu bg-nomad-primary/95 backdrop-blur-md border-t border-white/10">
     <div class="container mx-auto px-4 py-6 space-y-4">
       <a 
-        href="#destinos" 
-        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
+        href="/#destinos" 
+        class="block text-nomad-text-main/90 hover:text-nomad-text-main hover:pl-4 transition-all duration-200 font-medium"
         data-astro-prefetch
       >
         Destinos
       </a>
       <a 
-        href="#nosotros" 
-        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
+        href="/#nosotros" 
+        class="block text-nomad-text-main/90 hover:text-nomad-text-main hover:pl-4 transition-all duration-200 font-medium"
         data-astro-prefetch
       >
         Nosotros
       </a>
       <a 
-        href="#aventuras" 
-        class="block text-white/90 hover:text-white hover:pl-4 transition-all duration-200 font-medium"
-        data-astro-prefetch
-      >
-        Aventuras
-      </a>
-      <a 
-        href="#contacto" 
-        class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-200 mt-4"
+        href="/#contacto" 
+        class="inline-block bg-nomad-cta hover:bg-nomad-hover text-nomad-text-main px-6 py-2.5 rounded-full font-semibold transition-all duration-200 mt-4"
         data-astro-prefetch
       >
         Reservar
@@ -140,7 +126,7 @@ const { transparent = false } = Astro.props;
       
       // Clases para el efecto scroll
       nav.classList.toggle('backdrop-blur-md', scrolled);
-      nav.classList.toggle('bg-slate-900/30', scrolled);
+      nav.classList.toggle('bg-nomad-primary/70', scrolled);
       nav.classList.toggle('border-b', scrolled);
       nav.classList.toggle('border-white/10', scrolled);
       

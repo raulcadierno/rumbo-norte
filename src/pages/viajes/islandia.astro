@@ -1,0 +1,92 @@
+---
+import { getEntry, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TravelHero from '../../components/travel/TravelHero.astro';
+import QuickInfoBar from '../../components/travel/QuickInfoBar.astro';
+import TravelMapSummary from '../../components/travel/TravelMapSummary.astro';
+import ItinerarySection from '../../components/travel/ItinerarySection.astro';
+import islandiaPoster from '../../assets/viajes/islandia/islandia.jpg';
+import islandiaVid from '../../assets/viajes/islandia/islandia-vid.webm';
+import { getTravelData } from '../../utils/itineraryHelper';
+
+const viaje = await getEntry('viajes', 'islandia');
+
+if (!viaje) {
+  throw new Error('No se encontro la entrada de Islandia en la coleccion viajes.');
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  duration,
+  groupSize,
+  price,
+  primaryColor = '#1B263B',
+  backgroundColor = '#101729',
+  secondaryColor = '#1E293B',
+  ctaButtonColor = '#155DFC',
+  linkHoverColor = '#F97316',
+  textColor = '#E2E8F0'
+} = viaje.data;
+
+const safeBackgroundColor = backgroundColor.startsWith('#') ? backgroundColor : `#${backgroundColor}`;
+const { itineraryDays } = getTravelData(viaje);
+const { Content } = await render(viaje);
+---
+
+<Layout title={`${title} | Nomad Expeditions`} description={description}>
+  <main
+    style={`--color-primary: ${primaryColor}; --color-bg: ${safeBackgroundColor}; --color-secondary: ${secondaryColor}; --color-cta: ${ctaButtonColor}; --color-link-hover: ${linkHoverColor}; --color-text: ${textColor};`}
+  >
+    <TravelHero
+      title={title}
+      subtitle={subtitle}
+      description={description}
+      image={islandiaPoster}
+      videoSrc={islandiaVid}
+      posterSrc={islandiaPoster.src}
+    />
+
+    <section class="relative py-20 bg-brand-bg">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-16">
+            <QuickInfoBar
+              duration={duration}
+              groupSize={groupSize}
+              price={price}
+            />
+          </div>
+
+          <h2 class="text-3xl md:text-4xl lg:text-5xl text-center mb-12 leading-tight text-brand-text">
+            Resumen de la Expedicion
+          </h2>
+
+          <div class="summary-content prose prose-lg prose-slate prose-invert mx-auto text-center text-brand-text">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <TravelMapSummary itineraryDays={itineraryDays} />
+
+    <ItinerarySection
+      itineraryDays={itineraryDays}
+      placeholderImage={islandiaPoster}
+    />
+  </main>
+
+  <style>
+    .summary-content :global(h3),
+    .summary-content :global(h3 ~ *) {
+      display: none;
+    }
+
+    .summary-content :global(p) {
+      color: var(--color-text);
+      line-height: 1.75;
+    }
+  </style>
+</Layout>

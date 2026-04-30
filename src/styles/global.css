@@ -1,7 +1,45 @@
 @import "tailwindcss";
 
+@theme {
+  --color-nomad-primary: #0B1121;
+  --color-nomad-bg: #101729;
+  --color-nomad-secondary: #1E293B;
+  --color-nomad-cta: #2563EB;
+  --color-nomad-hover: #3B82F6;
+  --color-nomad-text-main: #FFFFFF;
+  --color-nomad-text-muted: #94A3B8;
+
+  --color-brand-bg: var(--color-bg);
+  --color-brand-primary: var(--color-primary);
+  --color-brand-secondary: var(--color-secondary);
+  --color-brand-cta: var(--color-cta);
+  --color-brand-link-hover: var(--color-link-hover);
+  --color-brand-text: var(--color-text);
+  --color-brand-text-main: var(--color-text-main);
+  --color-brand-text-muted: var(--color-text-muted);
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+:root {
+  --font-nomad: "Manrope", "Segoe UI", sans-serif;
+
+  /* Design tokens globales de Nomad Expeditions (Landing). */
+  --color-bg: #101729;
+  --color-primary: #0B1121;
+  --color-secondary: #1E293B;
+  --color-cta: #2563EB;
+  --color-link-hover: #3B82F6;
+  --color-hover: #3B82F6;
+  --color-text: #E2E8F0;
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #94A3B8;
+}
+
+body {
+  font-family: var(--font-nomad);
 }
 
 section[id] {
