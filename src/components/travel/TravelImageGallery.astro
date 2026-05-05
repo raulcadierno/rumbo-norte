@@ -14,12 +14,12 @@ const doubledImages = [...images, ...images];
 
 <section>
   <div class="gallery-marquee w-full overflow-hidden bg-brand-bg py-8 md:py-12">
-        <div class="animate-marquee flex w-max gap-4 py-2">
+        <div class="animate-marquee flex w-max gap-0">
             {doubledImages.map((image, index) => (
             <img
                 src={image.src}
                 alt={image.alt}
-                class="h-64 md:h-80 w-auto object-cover rounded-xl shrink-0 transition-transform duration-300 ease-out hover:scale-120"
+                class="h-64 md:h-80 w-auto object-cover shrink-0 transition-transform duration-300 ease-out hover:scale-120"
                 loading="lazy"
                 decoding="async"
                 aria-hidden={index >= images.length ? 'true' : 'false'}
