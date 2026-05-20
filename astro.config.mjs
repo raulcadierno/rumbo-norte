@@ -7,5 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  // Reemplaza con tu usuario y el nombre exacto de tu repositorio
+  site: 'https://raulcadierno.github.io',
+  base: '/rumbo-norte',
 });
