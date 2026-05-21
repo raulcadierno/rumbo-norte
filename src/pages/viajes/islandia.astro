@@ -6,6 +6,7 @@ import QuickInfoBar from '../../components/travel/QuickInfoBar.astro';
 import TravelImageGallery from '../../components/travel/TravelImageGallery.astro';
 import TravelMapSummary from '../../components/travel/TravelMapSummary.astro';
 import ItinerarySection from '../../components/travel/ItinerarySection.astro';
+import ItineraryAccordion from '../../components/travel/ItineraryAccordion.astro';
 import islandiaPoster from '../../assets/viajes/islandia/islandia.jpg';
 import islandiaVid from '../../assets/viajes/islandia/islandia-vid.webm';
 import islGallery1 from '../../assets/viajes/islandia/isl-gallery-1.jpg';
@@ -15,6 +16,7 @@ import islGallery4 from '../../assets/viajes/islandia/isl-gallery-4.jpg';
 import islGallery5 from '../../assets/viajes/islandia/isl-gallery-5.jpg';
 import islGallery6 from '../../assets/viajes/islandia/isl-gallery-6.jpg';
 import { getTravelData } from '../../utils/itineraryHelper';
+import faqMarkdown from '../../content/faq.md?raw';
 
 const viaje = await getEntry('viajes', 'islandia');
 
@@ -42,6 +44,12 @@ const accentColor = ctaButtonColor?.trim() || '#C4A484';
 const { itineraryDays } = getTravelData(viaje);
 const { Content } = await render(viaje);
 
+const accordionItinerary = itineraryDays.map((day, index) => ({
+  dayNumber: String(index + 1).padStart(2, '0'),
+  title: day.title,
+  content: `<p>${day.description}</p>`
+}));
+
 const galleryImages = [
   { src: islGallery1.src, alt: 'Volcanes activos en las tierras altas de Islandia' },
   { src: islGallery2.src, alt: 'Cascadas glaciares al amanecer en la costa sur' },
@@ -50,6 +58,37 @@ const galleryImages = [
   { src: islGallery5.src, alt: 'Laguna glaciar con icebergs a la deriva' },
   { src: islGallery6.src, alt: 'Ruta artica entre geiseres y mesetas volcanicas' }
 ];
+
+const markdownFaqToHtml = (markdown: string) => {
+  const blocks = markdown.split(/\n\n+/).map((block) => block.trim()).filter(Boolean);
+
+  return blocks
+    .map((block) => {
+      const lines = block.split('\n').map((line) => line.trim()).filter(Boolean);
+
+      if (lines.every((line) => line.startsWith('- '))) {
+        const items = lines.map((line) => `<li>${line.replace(/^-\s+/, '')}</li>`).join('');
+        return `<ul>${items}</ul>`;
+      }
+
+      return `<p>${block.replace(/\n+/g, ' ')}</p>`;
+    })
+    .join('');
+};
+
+const faqData = faqMarkdown
+  .split(/^##\s+/m)
+  .slice(1)
+  .map((section) => {
+    const [titleLine, ...bodyLines] = section.split('\n');
+    const title = titleLine.trim();
+    const contentMarkdown = bodyLines.join('\n').trim();
+
+    return {
+      title,
+      content: markdownFaqToHtml(contentMarkdown)
+    };
+  });
 ---
 
 <Layout title={`${title} | Nomad Expeditions`} description={description}>
@@ -82,7 +121,7 @@ const galleryImages = [
             Resumen de la Expedicion
           </h2>
 
-          <div class="summary-content prose prose-lg prose-slate prose-invert mx-auto text-center text-brand-text">
+          <div class="summary-content prose prose-lg prose-slate mx-auto text-center text-nomad-text-main">
             <Content />
           </div>
         </div>
@@ -92,12 +131,19 @@ const galleryImages = [
 
     <TravelMapSummary itineraryDays={itineraryDays} accentColor={accentColor} />
 
-    <ItinerarySection
-      itineraryDays={itineraryDays}
-      placeholderImage={islandiaPoster}
-    />
+    <ItineraryAccordion itinerary={accordionItinerary} />
 
     <TravelImageGallery images={galleryImages} />
+
+    <section class="bg-nomad-bg py-16 md:py-24">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-nomad-text-main">
+          Preguntas Frecuentes
+        </h2>
+
+        <ItineraryAccordion itinerary={faqData} />
+      </div>
+    </section>
     
   </main>
 
@@ -108,7 +154,7 @@ const galleryImages = [
     }
 
     .summary-content :global(p) {
-      color: var(--color-text);
+      color: var(--color-text-main);
       line-height: 1.75;
     }
   </style>
