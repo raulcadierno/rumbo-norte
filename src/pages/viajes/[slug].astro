@@ -65,20 +65,11 @@ const currentImage = imageMap[viaje.id as keyof typeof imageMap] || islandiaPost
 const hasVideo = viaje.id === 'islandia';
 const currentVideo = hasVideo ? islandiaVid : null;
 const currentPoster = viaje.id === 'islandia' ? islandiaPoster : currentImage;
-const hasCtaOverride = Boolean(ctaButtonColor?.trim());
-const ctaOverrideValue = ctaButtonColor?.trim();
+const accentColor = ctaButtonColor?.trim() || '#C4A484';
 ---
 
 <Layout title={`${title} | Nomad Expeditions`} description={description}>
-  {hasCtaOverride && (
-    <style define:vars={{ ctaOverrideValue }}>
-      main[data-trip-theme] {
-        --color-cta: var(--ctaOverrideValue);
-      }
-    </style>
-  )}
-
-  <main data-trip-theme>
+  <main data-trip-theme style={`--color-cta: ${accentColor};`}>
     <TravelHero
       title={title}
       subtitle={subtitle}
@@ -86,6 +77,7 @@ const ctaOverrideValue = ctaButtonColor?.trim();
       image={currentImage}
       videoSrc={currentVideo}
       posterSrc={currentPoster.src}
+      accentColor={accentColor}
     />
 
     <section class="relative py-20 bg-brand-bg">
@@ -96,6 +88,7 @@ const ctaOverrideValue = ctaButtonColor?.trim();
               duration={duration}
               groupSize={groupSize}
               price={price}
+              accentColor={accentColor}
             />
           </div>
 
@@ -112,7 +105,7 @@ const ctaOverrideValue = ctaButtonColor?.trim();
       </div>
     </section>
 
-    <TravelMapSummary itineraryDays={itineraryDays} />
+    <TravelMapSummary itineraryDays={itineraryDays} accentColor={accentColor} />
 
     <ItinerarySection
       itineraryDays={itineraryDays}

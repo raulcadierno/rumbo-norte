@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-nomad-primary: #0B1121;
-  --color-nomad-bg: #101729;
-  --color-nomad-secondary: #1E293B;
-  --color-nomad-cta: #2563EB;
-  --color-nomad-hover: #3B82F6;
-  --color-nomad-text-main: #FFFFFF;
-  --color-nomad-text-muted: #94A3B8;
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", sans-serif;
+
+  --color-nomad-primary: #2D3436;
+  --color-nomad-bg: #FDFDFD;
+  --color-nomad-secondary: #F5EFE8;
+  --color-nomad-cta: #C4A484;
+  --color-nomad-cta-hover: #B39373;
+  --color-nomad-hover: #B39373;
+  --color-nomad-text-main: #2D3436;
+  --color-nomad-text-muted: #6B7280;
 
   --color-brand-bg: var(--color-bg);
   --color-brand-primary: var(--color-primary);
@@ -27,19 +31,21 @@ html {
   --font-nomad: "Manrope", "Segoe UI", sans-serif;
 
   /* Design tokens globales de Nomad Expeditions (Landing). */
-  --color-bg: #101729;
-  --color-primary: #0B1121;
-  --color-secondary: #1E293B;
-  --color-cta: #2563EB;
-  --color-link-hover: #3B82F6;
-  --color-hover: #3B82F6;
-  --color-text: #E2E8F0;
-  --color-text-main: #FFFFFF;
-  --color-text-muted: #94A3B8;
+  --color-bg: #FDFDFD;
+  --color-primary: #2D3436;
+  --color-secondary: #F5EFE8;
+  --color-cta: #C4A484;
+  --color-link-hover: #B39373;
+  --color-hover: #B39373;
+  --color-text: #2D3436;
+  --color-text-main: #2D3436;
+  --color-text-muted: #6B7280;
 }
 
 body {
-  font-family: var(--font-nomad);
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
 }
 
 section[id] {

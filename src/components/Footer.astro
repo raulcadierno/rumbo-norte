@@ -2,11 +2,11 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-nomad-primary border-t border-slate-800/50">
+<footer class="bg-nomad-bg border-t border-slate-900/10">
   <div class="container mx-auto px-4 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
     <div class="flex items-center gap-3">
       <svg
-        class="w-8 h-8 text-blue-400"
+        class="w-8 h-8 text-nomad-cta"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -15,7 +15,7 @@ const currentYear = new Date().getFullYear();
         <circle cx="12" cy="12" r="10" />
         <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76" />
       </svg>
-      <span class="text-nomad-text-main font-bold text-xl">Nomad Expeditions</span>
+      <span class="font-display text-nomad-text-main font-bold tracking-tight text-xl">Nomad Expeditions</span>
     </div>
 
     <nav aria-label="Redes sociales" class="flex items-center gap-6">
@@ -23,7 +23,7 @@ const currentYear = new Date().getFullYear();
         href="https://instagram.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-nomad-text-muted hover:text-nomad-text-main transition-colors duration-200"
+        class="font-sans text-nomad-text-muted hover:text-nomad-cta-hover transition-colors duration-200"
       >
         Instagram
       </a>
@@ -31,7 +31,7 @@ const currentYear = new Date().getFullYear();
         href="https://facebook.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-nomad-text-muted hover:text-nomad-text-main transition-colors duration-200"
+        class="font-sans text-nomad-text-muted hover:text-nomad-cta-hover transition-colors duration-200"
       >
         Facebook
       </a>
@@ -39,13 +39,13 @@ const currentYear = new Date().getFullYear();
         href="https://twitter.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-nomad-text-muted hover:text-nomad-text-main transition-colors duration-200"
+        class="font-sans text-nomad-text-muted hover:text-nomad-cta-hover transition-colors duration-200"
       >
         Twitter
       </a>
     </nav>
 
-    <p class="text-slate-500 text-sm text-center md:text-right">
+    <p class="font-sans text-nomad-text-muted text-sm text-center md:text-right">
       © {currentYear} Nomad Expeditions. Todos los derechos reservados.
     </p>
   </div>

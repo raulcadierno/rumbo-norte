@@ -44,24 +44,24 @@ const {
 ---
 
 <!-- Sección de destinos con fondo oscuro -->
-<section class="bg-slate-950 pt-10 pb-14 lg:pt-14 lg:pb-20">
+<section class="bg-nomad-bg pt-10 pb-14 lg:pt-14 lg:pb-20">
   <div class="container mx-auto px-4">
     
     <!-- Header: Estructura vertical -->
     <div class="w-full mb-8 lg:mb-10">
       
       <!-- Label azul -->  
-      <p class="text-blue-400 text-sm font-medium tracking-wider uppercase mb-3">
+      <p class="font-sans text-nomad-cta text-sm font-medium tracking-wider uppercase mb-3">
         {subtitle}
       </p>
       
       <!-- Título principal -->
-      <h2 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4">
+      <h2 class="font-display text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-nomad-text-main leading-tight mb-4">
         {title}
       </h2>
       
       <!-- Texto descriptivo con ancho limitado -->
-      <p class="text-slate-400 text-base lg:text-lg leading-relaxed max-w-2xl">
+      <p class="font-sans font-normal text-stone-600 text-base lg:text-lg leading-relaxed max-w-2xl">
         {description}
       </p>
       
@@ -99,19 +99,19 @@ const {
             <div class="space-y-3">
               
               <!-- Título del destino -->
-              <h3 class="destination-title text-xl lg:text-2xl font-bold text-white leading-tight">
+              <h3 class="destination-title font-display text-xl lg:text-2xl font-bold tracking-tight text-white leading-tight">
                 {destination.title}
               </h3>
               
               <!-- Descripción (responsive: oculta en móvil/tablet, visible en desktop) -->
-              <p class="text-sm text-gray-200 leading-relaxed hidden lg:block">
+              <p class="font-sans font-normal text-sm text-gray-200 leading-relaxed hidden lg:block">
                 {destination.description}
               </p>
               
               <!-- Indicador clickeable -->
               <div class="pt-1">
-                <div class="destination-cta inline-flex items-center space-x-2 text-sm text-blue-400 font-medium transition-colors duration-200 group-hover:translate-x-1 group-hover:text-blue-300">
-                  <span>Explorar destino</span>
+                <div class="destination-cta inline-flex items-center space-x-2 text-sm text-nomad-cta font-medium transition-colors duration-200 group-hover:translate-x-1 group-hover:text-nomad-cta-hover">
+                  <span class="font-sans font-medium">Explorar destino</span>
                   
                   <!-- Icono flecha derecha -->
                   <svg 

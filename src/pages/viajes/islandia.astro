@@ -38,6 +38,7 @@ const {
 } = viaje.data;
 
 const safeBackgroundColor = backgroundColor.startsWith('#') ? backgroundColor : `#${backgroundColor}`;
+const accentColor = ctaButtonColor?.trim() || '#C4A484';
 const { itineraryDays } = getTravelData(viaje);
 const { Content } = await render(viaje);
 
@@ -53,7 +54,7 @@ const galleryImages = [
 
 <Layout title={`${title} | Nomad Expeditions`} description={description}>
   <main
-    style={`--color-primary: ${primaryColor}; --color-bg: ${safeBackgroundColor}; --color-secondary: ${secondaryColor}; --color-cta: ${ctaButtonColor}; --color-link-hover: ${linkHoverColor}; --color-text: ${textColor};`}
+    style={`--color-primary: ${primaryColor}; --color-bg: ${safeBackgroundColor}; --color-secondary: ${secondaryColor}; --color-cta: ${accentColor}; --color-link-hover: ${linkHoverColor}; --color-text: ${textColor};`}
   >
     <TravelHero
       title={title}
@@ -62,6 +63,7 @@ const galleryImages = [
       image={islandiaPoster}
       videoSrc={islandiaVid}
       posterSrc={islandiaPoster.src}
+      accentColor={accentColor}
     />
 
     <section class="relative py-20 bg-brand-bg">
@@ -72,6 +74,7 @@ const galleryImages = [
               duration={duration}
               groupSize={groupSize}
               price={price}
+              accentColor={accentColor}
             />
           </div>
 
@@ -87,7 +90,7 @@ const galleryImages = [
 
     </section>
 
-    <TravelMapSummary itineraryDays={itineraryDays} />
+    <TravelMapSummary itineraryDays={itineraryDays} accentColor={accentColor} />
 
     <ItinerarySection
       itineraryDays={itineraryDays}

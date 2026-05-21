@@ -6,7 +6,7 @@ export interface Props {
   accentColor?: string;
 }
 
-const { duration, groupSize, price, accentColor = '#2563EB' } = Astro.props as Props;
+const { duration, groupSize, price, accentColor = 'var(--color-cta, #C4A484)' } = Astro.props as Props;
 ---
 
 <div class="rounded-2xl p-8 md:p-12 backdrop-blur-sm bg-brand-secondary">
